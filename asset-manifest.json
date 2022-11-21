@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/react-hangman/static/css/main.fd336076.css",
+    "main.js": "/react-hangman/static/js/main.a8d42782.js",
+    "static/media/SpaceMono-Regular.ttf": "/react-hangman/static/media/SpaceMono-Regular.8a2aa304d0bd5e41d186.ttf",
+    "index.html": "/react-hangman/index.html",
+    "main.fd336076.css.map": "/react-hangman/static/css/main.fd336076.css.map",
+    "main.a8d42782.js.map": "/react-hangman/static/js/main.a8d42782.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fd336076.css",
+    "static/js/main.a8d42782.js"
+  ]
+}
