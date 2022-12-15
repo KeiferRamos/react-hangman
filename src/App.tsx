@@ -15,6 +15,8 @@ function App() {
   const [currentLvl, setCurrentLvl] = useState(1);
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [userAnswer, setUserAnswer] = useState<string[]>([]);
+  const [replay, setReplay] = useState(false);
+  const [final, setFinal] = useState(false);
 
   useEffect(() => {
     const current = answers.find(({ level }) => level === currentLvl)!;
@@ -34,17 +36,43 @@ function App() {
     }
   }, [userAnswer]);
 
+  useEffect(() => {
+    if (incorrect >= 6) {
+      setReplay(true);
+    }
+  }, [incorrect]);
+
+  const replayGame = () => {
+    setUserAnswer([]);
+    setReplay(false);
+    setIncorrect(0);
+  };
+
   const restart = () => {
     setUserAnswer([]);
     setPass(false);
   };
 
   const nextLvl = () => {
+    if (currentLvl >= answers.length) {
+      setFinal(true);
+      return;
+    }
     setCurrentLvl((prev) => prev + 1);
     setIncorrect(0);
   };
 
+  const playAgain = () => {
+    setUserAnswer([]);
+    setFinal(false);
+    setIncorrect(0);
+    setCurrentLvl(1);
+  };
+
   const addKey = (key: string) => {
+    if (userAnswer.includes(key)) {
+      return;
+    }
     if (!correctAnswer.includes(key)) {
       setIncorrect((prev) => prev + 1);
     }
@@ -83,7 +111,31 @@ function App() {
           <Keyboard key={i} {...{ el, addKey, userAnswer, correctAnswer }} />
         ))}
       </div>
-      {pass ? <Modal {...{ restart, nextLvl }} /> : null}
+      {pass ? (
+        <Modal>
+          <div>
+            <p>Yehey! You Got It Right!🥳</p>
+            <button onClick={nextLvl}>next level</button>
+            <button onClick={restart}>replay</button>
+          </div>
+        </Modal>
+      ) : null}
+      {replay ? (
+        <Modal>
+          <div>
+            <p>Opps! You Got It Wrong!🥳</p>
+            <button onClick={replayGame}>replay</button>
+          </div>
+        </Modal>
+      ) : null}
+      {final ? (
+        <Modal>
+          <div>
+            <p>That's it! Thank you for playing!🥳</p>
+            <button onClick={playAgain}>Play Again</button>
+          </div>
+        </Modal>
+      ) : null}
     </div>
   );
 }

@@ -1,18 +1,11 @@
+import React from "react";
+
 type ModalType = {
-  nextLvl: () => void;
-  restart: () => void;
+  children: React.ReactNode;
 };
 
-function Modal({ nextLvl, restart }: ModalType) {
-  return (
-    <div className="modal">
-      <div>
-        <p>Yehey! You Got It Right!🥳</p>
-        <button onClick={nextLvl}>next level</button>
-        <button onClick={restart}>replay</button>
-      </div>
-    </div>
-  );
+function Modal({ children }: ModalType) {
+  return <div className="modal">{children}</div>;
 }
 
 export default Modal;
