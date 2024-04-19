@@ -19,11 +19,11 @@ body {
 }
 
 .App {
-  display: flex;
   gap: 150px;
   padding: 10px;
   position: relative;
-  width: 650px;
+  width: 800px;
+  height: max-content;
 }
 
 .hangman {
@@ -31,6 +31,7 @@ body {
   height: 250px;
   position: relative;
 }
+
 .ground,
 .pole,
 .hanger,
@@ -150,21 +151,30 @@ body {
   text-transform: uppercase;
 }
 
+.upper-part {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: end;
+  margin-bottom: 50px;
+  gap: 50px;
+}
+
+.slider {
+  width: 450px;
+}
+
 .hint {
-  position: absolute;
-  max-width: 400px;
+  height: 100px;
   text-align: end;
-  right: 10px;
 }
 
 .keyboard {
-  position: absolute;
-  width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  top: 110%;
+  margin-top: 20px;
 }
 
 .keyboard > div {

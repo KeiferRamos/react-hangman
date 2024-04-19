@@ -5,13 +5,14 @@ import Modal from "./components/Modal";
 import answers from "./data/answer";
 import hangman from "./data/hangman";
 import letters from "./data/letters";
+import { Carousel, Slider } from "antd";
 
-type hintType = { message: string; author: string };
+type hintType = { message: string; author: string }[];
 
 function App() {
   const [incorrect, setIncorrect] = useState(0);
   const [pass, setPass] = useState(false);
-  const [{ message, author }, setHint] = useState<hintType>({} as hintType);
+  const [hint, setHint] = useState<hintType>([] as hintType);
   const [currentLvl, setCurrentLvl] = useState(1);
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [userAnswer, setUserAnswer] = useState<string[]>([]);
@@ -21,6 +22,7 @@ function App() {
   useEffect(() => {
     const current = answers.find(({ level }) => level === currentLvl)!;
     setCorrectAnswer(current.answer);
+    console.log(current);
     setHint(current.hint);
     setUserAnswer([]);
     setPass(false);
@@ -29,6 +31,7 @@ function App() {
 
   useEffect(() => {
     if (userAnswer.length) {
+      console.log(userAnswer);
       const isCorrect = Array.from(correctAnswer).every((el) =>
         userAnswer.includes(el)
       );
@@ -81,29 +84,43 @@ function App() {
 
   return (
     <div className="App">
-      <div className="hangman">
-        <div className="ground"></div>
-        <div className="pole"></div>
-        <div className="hanger"></div>
-        <div className="triangle"></div>
-        <div className="rope"></div>
-        {hangman.map((el, i) => {
-          return (
-            <div
-              key={i}
-              className={el}
-              style={{ display: incorrect > i ? "block" : "none" }}
-            ></div>
-          );
-        })}
+      <div className="upper-part">
+        <div className="hangman">
+          <div className="ground"></div>
+          <div className="pole"></div>
+          <div className="hanger"></div>
+          <div className="triangle"></div>
+          <div className="rope"></div>
+          {hangman.map((el, i) => {
+            return (
+              <div
+                key={i}
+                className={el}
+                style={{ display: incorrect > i ? "block" : "none" }}
+              ></div>
+            );
+          })}
+        </div>
+
+        <div>
+          <Carousel className="slider">
+            {hint.map(({ message, author }) => {
+              return (
+                <div className="hint">
+                  <p>{message}</p>
+                  <p> -{author}</p>
+                </div>
+              );
+            })}
+          </Carousel>
+        </div>
       </div>
-      <div className="hint">
-        <p>{message}</p>
-        <p> -{author}</p>
-      </div>
+
       <div className="answer-box">
         {Array.from(correctAnswer).map((el, i) => {
-          return <div key={i}>{userAnswer.includes(el) ? el : ""}</div>;
+          return (
+            <div key={i}>{userAnswer.includes(el.toLowerCase()) ? el : ""}</div>
+          );
         })}
       </div>
       <div className="keyboard">
