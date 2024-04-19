@@ -57,4 +57,19 @@ export default [
     ],
     level: 3,
   },
+  {
+    answer: "saserdote",
+    hint: [
+      {
+        message: "sila ang nagsisilbing kinatawan ng Diyos",
+        author: "Exodo",
+      },
+      {
+        message:
+          "Si Aaron at ang kanyang mga anak ang pinili ni Jehova sa ganitong atas.",
+        author: "Exodo",
+      },
+    ],
+    level: 4,
+  },
 ];

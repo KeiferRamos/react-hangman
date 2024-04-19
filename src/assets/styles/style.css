@@ -165,8 +165,9 @@ body {
 }
 
 .hint {
-  height: 100px;
   text-align: end;
+  font-size: 19px;
+  margin-bottom: 20px;
 }
 
 .keyboard {
